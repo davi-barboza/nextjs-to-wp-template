@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+src/graphql/graphql-schema.json
+src/graphql/@generated/index.ts
+src/graphql/@generated/graphql.ts
+src/graphql/@generated/gql.ts
+package-lock.json

@@ -1,0 +1,34 @@
+query GetMedias($where: RootQueryToMediaItemConnectionWhereArgs) {
+  mediaItems(where: $where) {
+    nodes {
+      id
+      sourceUrl
+      altText
+    }
+  }
+}
+
+query GetEquipamentos($where: RootQueryToEquipamentoConnectionWhereArgs, $after: String, $before: String, $first: Int, $last: Int){
+  equipamentos(where: $where, after: $after, before: $before, first: $first, last: $last){
+     nodes {
+      id
+      title
+      equipamentos {
+        descricao
+        grupoEquipamento{
+          node{
+             ... on GrupoEquipamento {
+              id
+              title
+              grupoEquipamentos {
+                descricao
+                cor
+                localizacao
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

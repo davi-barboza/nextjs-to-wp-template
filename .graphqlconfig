@@ -1,0 +1,12 @@
+{
+  "schemaPath": "./src/graphql/graphql-schema.json",
+  "documents": "./src/graphql/**/*.graphql",
+  "extensions": {
+    "endpoints": {
+      "default": {
+        "url": "http://wp-music-stock.local/graphql",
+        "introspection": true
+      }
+    }
+  }
+}
