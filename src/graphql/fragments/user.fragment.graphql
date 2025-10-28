@@ -1,0 +1,16 @@
+fragment GetUser on User {
+  id
+  databaseId
+  name
+  username
+  email
+  avatar {
+    url
+  }
+  roles {
+    nodes {
+      name
+      displayName
+    }
+  }
+}

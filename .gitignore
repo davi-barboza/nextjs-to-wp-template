@@ -44,3 +44,4 @@ src/graphql/@generated/index.ts
 src/graphql/@generated/graphql.ts
 src/graphql/@generated/gql.ts
 package-lock.json
+yarn.lock

@@ -1,0 +1,15 @@
+mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    authToken
+    refreshToken
+    user {
+      ...GetUser
+    }
+  }
+}
+
+mutation RefreshJwtAuthToken($input: RefreshJwtAuthTokenInput!) {
+  refreshJwtAuthToken(input: $input) {
+    authToken
+  }
+}

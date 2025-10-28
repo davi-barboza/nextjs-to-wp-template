@@ -1,0 +1,5 @@
+mutation DeletarEquipamento($input: DeleteEquipamentoInput!) {
+  deleteEquipamento(input: $input) {
+    deletedId
+  }
+}

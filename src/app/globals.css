@@ -1,26 +1,273 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===========================
+   Base tokens (modo claro)
+   =========================== */
 :root {
+  /* Cores “semânticas” de página */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1C2434; /* preto DEFAULT do config */
+
+  /* Superfícies/bordas padrão usadas no layout */
+  --surface: #ffffff;
+  --stroke: #E2E8F0;
+
+  /* Paleta vinda do tailwind.config v3 */
+  --black: #1C2434;             /* black.DEFAULT */
+  --black-2: #010101;
+
+  --body: #64748B;
+  --bodydark: #AEB7C0;
+  --bodydark1: #DEE4EE;
+  --bodydark2: #8A99AF;
+
+  --primary: #3C50E0;
+  --secondary: #80CAEE;
+
+  --gray: #EFF4FB;              /* gray.DEFAULT */
+  --gray-2: #F7F9FC;
+  --gray-3: #FAFAFA;
+  --graydark: #333A48;
+
+  --whiten: #F1F5F9;
+  --whiter: #F5F7FD;
+
+  --boxdark: #24303F;
+  --boxdark-2: #1A222C;
+  --strokedark: #2E3A47;
+  --form-strokedark: #3d4d60;
+  --form-input: #1d2a39;
+
+  --meta-1: #DC3545;
+  --meta-2: #EFF2F7;
+  --meta-3: #10B981;
+  --meta-4: #313D4A;
+  --meta-5: #259AE6;
+  --meta-6: #FFBA00;
+  --meta-7: #FF6766;
+  --meta-8: #F0950C;
+  --meta-9: #E5E7EB;
+  --meta-10:#0FADCF;
+
+  --success: #219653;
+  --danger:  #D34053;
+  --warning: #FFA70B;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* ===========================
+   Dark – por *media query*
+   (o v4 usa media por padrão)
+   =========================== */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
+    /* superfícies no dark */
+    --surface: #24303F; /* usa o boxdark como “card” no dark */
   }
 }
 
+/* ===========================
+   (Opcional) Dark por classe
+   Se você quiser *forçar* dark com <html class="dark">,
+   isso mantém os tokens coerentes mesmo sem media query.
+   =========================== */
+:root.dark {
+  color-scheme: dark;
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --surface: #24303F;
+}
+
+/* ===========================
+   Tailwind v4 — publicar tokens
+   =========================== */
+@theme {
+  /* Breakpoints extras (além dos padrões) */
+  --breakpoint-2xsm: 375px;
+  --breakpoint-xsm:  425px;
+  --breakpoint-3xl:  2000px;
+
+  /* Fonts do next/font (layout.tsx injeta estas vars) */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Cores como utilities Tailwind */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-stroke: var(--stroke);
+
+  --color-black: var(--black);
+  --color-black-2: var(--black-2);
+
+  --color-body: var(--body);
+  --color-bodydark: var(--bodydark);
+  --color-bodydark-1: var(--bodydark1);
+  --color-bodydark-2: var(--bodydark2);
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
+  --color-gray: var(--gray);
+  --color-gray-2: var(--gray-2);
+  --color-gray-3: var(--gray-3);
+  --color-graydark: var(--graydark);
+
+  --color-whiten: var(--whiten);
+  --color-whiter: var(--whiter);
+
+  --color-boxdark: var(--boxdark);
+  --color-boxdark-2: var(--boxdark-2);
+  --color-strokedark: var(--strokedark);
+  --color-form-strokedark: var(--form-strokedark);
+  --color-form-input: var(--form-input);
+
+  --color-meta-1: var(--meta-1);
+  --color-meta-2: var(--meta-2);
+  --color-meta-3: var(--meta-3);
+  --color-meta-4: var(--meta-4);
+  --color-meta-5: var(--meta-5);
+  --color-meta-6: var(--meta-6);
+  --color-meta-7: var(--meta-7);
+  --color-meta-8: var(--meta-8);
+  --color-meta-9: var(--meta-9);
+  --color-meta-10:var(--meta-10);
+
+  --color-success: var(--success);
+  --color-danger:  var(--danger);
+  --color-warning: var(--warning);
+
+  /* Font sizes “title-*” (size + leading) */
+  --text-title-xxl: 44px;   --leading-title-xxl: 55px;
+  --text-title-xxl2:42px;   --leading-title-xxl2:58px;
+  --text-title-xl:  36px;   --leading-title-xl:  45px;
+  --text-title-xl2: 33px;   --leading-title-xl2: 45px;
+  --text-title-lg:  28px;   --leading-title-lg:  35px;
+  --text-title-md:  24px;   --leading-title-md:  30px;
+  --text-title-md2: 26px;   --leading-title-md2: 30px;
+  --text-title-sm:  20px;   --leading-title-sm:  26px;
+  --text-title-sm2: 22px;   --leading-title-sm2: 28px;
+  --text-title-xsm: 18px;   --leading-title-xsm: 24px;
+
+  /* Spacing — publique só o que você usa (o resto use [arb] ex.: p-[4.375rem]) */
+  --spacing-15:   3.75rem;
+  --spacing-17_5: 4.375rem;   /* 17.5 */
+  --spacing-26:   6.5rem;
+  --spacing-280:  70rem;
+
+  /* Larguras/Alturas derivam do spacing (ex.: max-w-280) */
+
+  /* Bordas extras */
+  --border-6:  6px;
+  --border-10: 10px;
+  --border-12: 12px;
+
+  /* Z-index */
+  --z-1: 1;
+  --z-9: 9;
+  --z-99: 99;
+  --z-999: 999;
+  --z-9999: 9999;
+  --z-99999: 99999;
+  --z-999999: 999999;
+
+  /* Opacity */
+  --opacity-65: .65;
+
+  /* Sombras (mantém nomes) */
+  --shadow-default: 0px 8px 13px -3px rgba(0,0,0,.07);
+  --shadow-card:    0px 1px 3px rgba(0,0,0,.12);
+  --shadow-card-2:  0px 1px 2px rgba(0,0,0,.05);
+  --shadow-switcher: 0px 2px 4px rgba(0,0,0,.2), inset 0px 2px 2px #FFFFFF, inset 0px -1px 1px rgba(0,0,0,.1);
+  --shadow-switch-1: 0px 0px 5px rgba(0,0,0,.15);
+  --shadow-1: 0px 1px 3px rgba(0,0,0,.08);
+  --shadow-2: 0px 1px 4px rgba(0,0,0,.12);
+  --shadow-3: 0px 1px 5px rgba(0,0,0,.14);
+  --shadow-4: 0px 4px 10px rgba(0,0,0,.12);
+  --shadow-5: 0px 1px 1px rgba(0,0,0,.15);
+  --shadow-6: 0px 3px 15px rgba(0,0,0,.1);
+  --shadow-7: -5px 0 0 #313D4A, 5px 0 0 #313D4A;
+  --shadow-8: 1px 0 0 #313D4A, -1px 0 0 #313D4A, 0 1px 0 #313D4A, 0 -1px 0 #313D4A, 0 3px 13px rgb(0 0 0 / 8%);
+  --shadow-9: 0px 2px 3px rgba(183,183,183,.5);
+  --shadow-10:0px 1px 2px 0px rgba(0,0,0,.10);
+  --shadow-11:0px 1px 3px 0px rgba(166,175,195,.40);
+  --shadow-12:0px .5px 3px 0px rgba(0,0,0,.18);
+  --shadow-13:0px 1px 3px 0px rgba(0,0,0,.08);
+  --shadow-14:0px 2px 3px 0px rgba(0,0,0,.10);
+
+  /* Drop shadows */
+  --drop-shadow-1: 0px 1px 0px #E2E8F0;
+  --drop-shadow-2: 0px 1px 4px rgba(0,0,0,.12);
+  --drop-shadow-3: 0px 0px 4px rgba(0,0,0,.15);
+  --drop-shadow-4: 0px 0px 2px rgba(0,0,0,.2);
+  --drop-shadow-5: 0px 1px 5px rgba(0,0,0,.2);
+
+  /* Transitions extras */
+  --transition-width: width;
+  --transition-stroke: stroke;
+
+  /* Aspect ratios */
+  --aspect-4\\/3: 4 / 3;
+  --aspect-21\\/9: 21 / 9;
+}
+
+/* ===========================
+   Base element styling
+   =========================== */
+html, body { height: 100%; }
+
 body {
+  /* você pode trocar por @apply bg-background text-foreground font-sans se preferir */
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Util: imagem de background e content (substitui theme.extend.backgroundImage/content) */
+.bg-video { background-image: url('/images/video/video.png'); }
+.content-icon-copy { content: url('/images/icon/icon-copy-alt.svg'); }
+
+/* ===========================
+   Animações (keyframes + classes)
+   =========================== */
+@keyframes linspin { 100% { transform: rotate(360deg) } }
+@keyframes easespin {
+  12.5% { transform: rotate(135deg) }
+  25%   { transform: rotate(270deg) }
+  37.5% { transform: rotate(405deg) }
+  50%   { transform: rotate(540deg) }
+  62.5% { transform: rotate(675deg) }
+  75%   { transform: rotate(810deg) }
+  87.5% { transform: rotate(945deg) }
+  100%  { transform: rotate(1080deg) }
+}
+@keyframes left-spin  { 0% {transform: rotate(130deg)} 50% {transform: rotate(-5deg)} 100% {transform: rotate(130deg)} }
+@keyframes right-spin { 0% {transform: rotate(-130deg)} 50% {transform: rotate(5deg)} 100% {transform: rotate(-130deg)} }
+@keyframes rotating   { 0%,100% {transform: rotate(360deg)} 50% {transform: rotate(0deg)} }
+@keyframes topbottom  { 0%,100% { transform: translate3d(0,-100%,0) } 50% { transform: translate3d(0,0,0) } }
+@keyframes bottomtop  { 0%,100% { transform: translate3d(0,0,0) } 50% { transform: translate3d(0,-100%,0) } }
+@keyframes line       { 0%,100% { transform: translateY(0) } 50% { transform: translateY(100%) } }
+@keyframes line-revert{ 0%,100% { transform: translateY(100%) } 50% { transform: translateY(0) } }
+@keyframes loading    { 0% {transform: translateX(-100%)} 50% {transform: translateX(0)} 100% {transform: translateX(100%)} }
+
+/* helpers de animação (equivalentes a theme.extend.animation) */
+.animate-linspin        { animation: linspin 1568.2353ms linear infinite }
+.animate-easespin       { animation: easespin 5332ms cubic-bezier(0.4,0,0.2,1) infinite both }
+.animate-left-spin      { animation: left-spin 1333ms cubic-bezier(0.4,0,0.2,1) infinite both }
+.animate-right-spin     { animation: right-spin 1333ms cubic-bezier(0.4,0,0.2,1) infinite both }
+.animate-ping-once      { animation: ping 5s cubic-bezier(0,0,0.2,1) }
+.animate-rotating       { animation: rotating 30s linear infinite }
+.animate-topbottom      { animation: topbottom 60s infinite alternate linear }
+.animate-bottomtop      { animation: bottomtop 60s infinite alternate linear }
+.animate-spin-1\.5     { animation: spin 1.5s linear infinite }
+.animate-spin-2         { animation: spin 2s linear infinite }
+.animate-spin-3         { animation: spin 3s linear infinite }
+.animate-line1          { animation: line 10s infinite linear }
+.animate-line2          { animation: line-revert 8s infinite linear }
+.animate-line3          { animation: line 7s infinite linear }
+.animate-loading        { animation: loading 1s infinite }

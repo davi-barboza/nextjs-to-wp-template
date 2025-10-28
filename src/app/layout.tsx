@@ -1,15 +1,22 @@
+import NotifyGlobal from "@/components/Notify/NotifyGlobal";
+import { AuthProvider } from "@/contexts/AuthContext";
+import ApolloProviderWrapper from "@/graphql/apollo/apollo-provider-wrapper";
+import ThemeProviderClient from "@/providers/ThemeProviderClient";
+import StoreProviderWrapper from "@/store/storeProviderWrapper";
+import { AnimatePresence } from "framer-motion";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-sans", // <- vira var() no CSS
+  display: "swap",
 });
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="pt-br" suppressHydrationWarning>
+      <body className={`${inter.variable} ${jetbrains.variable} antialiased`}>
+        <StoreProviderWrapper>
+          <ApolloProviderWrapper>
+            <AuthProvider>
+              <ThemeProviderClient>
+                {children}
+                <AnimatePresence>
+                  <NotifyGlobal />
+                </AnimatePresence>
+              </ThemeProviderClient>
+            </AuthProvider>
+          </ApolloProviderWrapper>
+        </StoreProviderWrapper>
       </body>
     </html>
   );
