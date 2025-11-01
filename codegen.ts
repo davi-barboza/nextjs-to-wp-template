@@ -1,7 +1,7 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
-  schema: "http://wp-music-stock.local/graphql",
+  schema: "http://stock.local/graphql",
   documents: ["src/**/*.{ts,tsx,graphql}", "!src/gql/**/*"],
   generates: {
     "./src/graphql/@generated/": {

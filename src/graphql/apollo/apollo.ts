@@ -3,16 +3,14 @@ import { NotifySeverityEnum } from "@/domain/enums/notify-severity.enum";
 import { StatusCodeEnum } from "@/domain/enums/status-code.enum";
 import store from "@/store";
 import { addNotification } from "@/store/notificationSlice";
-import { ErrorLike } from "@apollo/client";
 import {
   ApolloClient,
   ApolloLink,
   CombinedGraphQLErrors,
   CombinedProtocolErrors,
-  gql,
   HttpLink,
   InMemoryCache,
-  Observable,
+  Observable
 } from "@apollo/client";
 import { SetContextLink } from "@apollo/client/link/context";
 import { ErrorLink } from "@apollo/client/link/error";
@@ -162,3 +160,4 @@ const createApolloClient = () =>
 const apolloClient = createApolloClient();
 
 export { apolloClient, createApolloClient };
+
